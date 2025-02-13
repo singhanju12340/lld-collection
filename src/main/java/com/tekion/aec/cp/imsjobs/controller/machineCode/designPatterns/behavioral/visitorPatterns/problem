@@ -1,0 +1,9 @@
+shopping cart system where you have different types of items,
+like books and fruits.
+ In current implementation Each item might require a calculation for its cost with 105 discount only.
+ But later we may need calculation based on current season like in summer orange prices will be 50%,
+  AC prices will be increased by 20%.
+
+Imbedding these calculation in item class will require frequent changes in original classes.
+Visitor pattern allows us to have different calculation in different classes for all the items.
+Adding new type of calculation need only addition of new visitor implementation, and original items will not be modified.

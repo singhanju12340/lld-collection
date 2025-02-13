@@ -1,0 +1,6 @@
+The Key-Value store should expose the following functions:
+get(String key) => Should return the value (object with attributes and their values). Return null if key not present
+search(String attributeKey, String attributeValue) => Returns a list of keys that have the given attribute key, value pair.
+put(String key, List<Pair<String, String>> listOfAttributePairs) => Adds the key and the attributes to the key-value store. If the key already exists then the value is replaced.
+delete(String key) => Deletes the key, value pair from the store.
+keys() => Return a list of all the keys

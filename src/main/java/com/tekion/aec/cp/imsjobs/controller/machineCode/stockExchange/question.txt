@@ -1,0 +1,20 @@
+Functional Requirements
+Place Orders:
+Buyers and sellers can place orders (buy/sell) for specific stocks.
+Order Matching:
+Match buy and sell orders based on price and quantity.
+Trade Execution:
+Execute trades once orders are matched.
+Order Book Management:
+Maintain an order book for each stock.
+Notifications:
+Notify users of trade execution and order status.
+
+
+Non-Functional Requirements
+Scalability:
+Handle a high volume of orders and trades.
+Low Latency:
+Match orders and execute trades with minimal delay.
+Fault Tolerance:
+Ensure system reliability and data integrity.

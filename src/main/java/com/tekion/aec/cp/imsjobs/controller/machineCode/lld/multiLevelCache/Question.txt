@@ -1,0 +1,11 @@
+Problem Statement:
+
+Design a caching system with:
+Multiple levels of cache (e.g., L1, L2).
+Eviction policies (LRU, LFU).
+Cache hit/miss tracking.
+Key Concepts:
+
+Classes: Cache, CacheLevel, EvictionPolicy.
+Methods: get(), put(), evict().
+Data structures: LinkedHashMap for LRU, Heap for LFU.
