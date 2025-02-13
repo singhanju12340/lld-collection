@@ -1,7 +1,6 @@
 package com.machineCode.splitwise;
 
 import com.machineCode.splitwise.command.CommandFactory;
-import com.tekion.aec.cp.imsjobs.controller.machineCode.splitwise.command.*;
 import com.machineCode.splitwise.models.CommandsKey;
 
 import java.util.Scanner;

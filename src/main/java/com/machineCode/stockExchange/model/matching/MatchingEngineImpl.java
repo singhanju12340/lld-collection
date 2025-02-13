@@ -1,6 +1,5 @@
 package com.machineCode.stockExchange.model.matching;
 
-import com.tekion.aec.cp.imsjobs.controller.ContestLeaderBoard.models.User;
 
 /**
  * @author anju
