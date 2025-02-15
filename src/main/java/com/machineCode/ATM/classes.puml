@@ -1,0 +1,57 @@
+@startuml
+
+class Account{
+    String number
+    double balance
+    credit()
+    debit()
+}
+
+interface Validator{
+    String data
+      void methods()
+}
+
+class AtmServiceImpl{
+    CashDispenser cashDispenser
+    BankService bankService
+      void methods()
+}
+
+class CashDispenser{
+    String atmTotalCash
+     void add()
+     void reduce()
+}
+
+class BankService{
+    List<Account> accounts
+    void processTxn()
+}
+
+
+
+interface Transaction{
+    String type
+      void execute()
+}
+
+class WithdrawTransaction implements Transaction{
+    String type="withdraw
+      void execute()
+}
+
+class DepositTransaction implements Transaction{
+    String type= "deposit"
+      void execute()
+}
+
+class AtmService{
+    void deposit()
+    void withdrae()
+
+}
+
+@enduml
+
+
