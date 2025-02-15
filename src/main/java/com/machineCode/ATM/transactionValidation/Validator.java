@@ -1,6 +1,7 @@
 package com.machineCode.ATM.transactionValidation;
 
 import com.machineCode.ATM.Account;
+import com.machineCode.ATM.Card;
 
 /**
  * @author anju
@@ -9,11 +10,21 @@ import com.machineCode.ATM.Account;
 public abstract class Validator {
     Validator nextValidator;
 
-    public abstract boolean validate(Account account, double amount);
+    public boolean validate(Account account, double amount){
+        return false;
+    }
+
+    public boolean validate(Card card, String pin){
+        return false;
+    }
+
+
 
     public void setNext( Validator validator){
         nextValidator = validator;
     }
+
+
 }
 
 

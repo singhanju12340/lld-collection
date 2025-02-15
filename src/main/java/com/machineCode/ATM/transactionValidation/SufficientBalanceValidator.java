@@ -10,7 +10,13 @@ public class SufficientBalanceValidator extends Validator{
 
     @Override
     public boolean validate(Account account, double amount) {
-        if(account.getAccountBalance()>=amount) return true;
+        if(account.getAccountBalance()>=amount)
+             if(nextValidator!= null){
+                 return nextValidator.validate(account, amount);
+             }else{
+                 return true;
+             }
+
         return false;
     }
 }

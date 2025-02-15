@@ -9,12 +9,18 @@ public class ATMDemo {
     public static void main(String[] args) {
 
         SBIBankService bankService = new SBIBankService();
+
         bankService.createAccount("anju", 10000);
         bankService.createAccount("santosh", 1000);
 
 
+
         AtmService atmService = new AtmService(bankService);
         atmService.checkBalance("anju");
+        atmService.withdraw("anju", 500);
+        atmService.checkBalance("anju");
+
+
     }
 }
 

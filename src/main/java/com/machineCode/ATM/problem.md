@@ -4,3 +4,10 @@
 4. The ATM should have a cash dispenser to dispense cash to users.
 5. The system should handle concurrent access and ensure data consistency.
 6. The ATM should have a user-friendly interface for users to interact with.
+
+
+
+Solution:
+
+
+Using Chain of responsibility design pattern to design validator

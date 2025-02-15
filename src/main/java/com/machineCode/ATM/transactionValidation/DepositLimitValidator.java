@@ -9,8 +9,9 @@ import com.machineCode.ATM.Account;
 public class DepositLimitValidator extends Validator{
     @Override
     public boolean validate(Account account, double amount) {
-        if (amount > 5000)
-            return false;
+        if (amount < 5000)
+            return nextValidator.validate(account, amount);
+        
         return true;
     }
 }
