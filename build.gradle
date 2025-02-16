@@ -14,7 +14,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'org.springframework.boot' version '2.5.4'
+    id 'org.springframework.boot' version '2.6.4'
     id "maven"
     id "maven-publish"
 }
@@ -27,13 +27,6 @@ sourceCompatibility = 11
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://tkartifactory.tekioncloud.xyz/repository/tek-product-maven-snapshots'
-        credentials {
-            username = "${mavenUser}"
-            password = "${mavenPassword}"
-        }
-    }
 }
 
 
@@ -89,7 +82,9 @@ dependencies {
     compileOnly('org.projectlombok:lombok:1.18.20')
     annotationProcessor('org.projectlombok:lombok:1.18.20')
 
-
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+//    implementation "io.netty:netty-all"
+    implementation("io.netty:netty-resolver-dns-native-macos:4.1.86.Final:osx-x86_64")
 
 }
 
