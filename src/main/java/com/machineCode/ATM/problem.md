@@ -11,3 +11,26 @@ Solution:
 ![img.png](img.png)
 
 Using Chain of responsibility design pattern to design validator
+
+### ATM works as finite state machine. we can use state design pattern in its implementations
+#state interface ATMState
+
+read_inserted_card
+authenticate_pin
+select_transaction
+deposit_cash
+invalid_cash_returned
+enter_withdrawal_amount
+cash_dispensed
+display_balance
+transact_again
+exit
+return_card
+
+
+singleton pattern
+
+
+
+
+State design: ATM, Vending machine, traffic signal, Order system

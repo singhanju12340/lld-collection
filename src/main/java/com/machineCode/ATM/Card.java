@@ -9,4 +9,9 @@ public class Card {
     private String expiry;
     private String pin;
 
+    public Card(String cardNo, String expiry, String pin) {
+        this.cardNo = cardNo;
+        this.expiry = expiry;
+        this.pin = pin;
+    }
 }

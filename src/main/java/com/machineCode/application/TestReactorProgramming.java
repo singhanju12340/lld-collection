@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
  */
 public class TestReactorProgramming {
     private static final WebClient webClient = WebClient.builder()
-            .baseUrl("http://localhost:8080")
+            .baseUrl("http://localhost:8080/")
 //                .defaultHeader("Authorization", "Bearer YOUR_ACCESS_TOKEN")
             .build();
 
@@ -19,8 +19,8 @@ public class TestReactorProgramming {
 //        new TestReactorProgramming().testWebclient();
 //        testConcat();
 //        testBackPressure();
-        System.out.println(new TestReactorProgramming().findUserById(1));
-
+//        System.out.println(new TestReactorProgramming().findUserById(1));
+       new TestReactorProgramming().testWebclientPublic();
 
 
     }
@@ -90,5 +90,20 @@ public class TestReactorProgramming {
                 error -> System.err.println("Error: " + error.getMessage())
         );
 
+    }
+
+    public void testWebclientPublic(){
+
+        Flux<User> responseMono =  WebClient.builder().build().get()
+                .uri("https://anjukumari.free.beeceptor.com/todos")
+                .retrieve()
+                .bodyToFlux(User.class);
+
+        System.out.println("dgfhjklfghjk");
+
+        responseMono.subscribe(
+                response -> System.out.println("Response: " + response),
+                error -> System.err.println("Error: " + error.getMessage())
+        );
     }
 }

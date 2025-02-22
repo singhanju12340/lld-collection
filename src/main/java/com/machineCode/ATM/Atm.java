@@ -1,5 +1,8 @@
 package com.machineCode.ATM;
 
+import com.machineCode.ATM.atm_states.ATMStateService;
+import com.machineCode.ATM.atm_states.ATMStates;
+
 /**
  * @author anju
  * @created on 13/02/25 and 3:18 PM
@@ -15,6 +18,8 @@ public interface Atm {
     public boolean authenticateUser(Card cardDetails);
 
     public boolean validateTxn(String accountNo, double amount);
+
+    public void changeCurrentState(ATMStates newState);
 
 
 }

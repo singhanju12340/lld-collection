@@ -1,5 +1,6 @@
 package com.machineCode.ATM;
 
+import com.machineCode.ATM.atm_states.*;
 import com.machineCode.ATM.transactionValidation.CashAvailabilityValidator;
 import com.machineCode.ATM.transactionValidation.DepositLimitValidator;
 import com.machineCode.ATM.transactionValidation.SufficientBalanceValidator;
@@ -11,26 +12,32 @@ import com.machineCode.ATM.transactionValidation.SufficientBalanceValidator;
 public class AtmService implements Atm{
     private SBIBankService bankService;
     private AtmCashDispenser atmCachDispenser;
+    private static AtmService atmService;
+    private AtmStateFactoryImpl atmStateFactory;
+
+    private ATMStateService atmState;
 
 
-    DepositLimitValidator depositLimitValidator;
-    SufficientBalanceValidator sufficientBalanceValidator;
-    CashAvailabilityValidator cashAvailabilityValidator;
+    public static final AtmService getInstance(){
+        if(atmService == null) {
+            atmService = new AtmService();
+        }
+        return atmService;
+    }
 
 
-    public AtmService(SBIBankService bankService) {
-        this.bankService = bankService;
 
-        cashAvailabilityValidator = new CashAvailabilityValidator();
-        sufficientBalanceValidator = new SufficientBalanceValidator();
 
-        sufficientBalanceValidator.setNext(null);
-        cashAvailabilityValidator.setNext(sufficientBalanceValidator);
 
-        depositLimitValidator = new DepositLimitValidator();
-        depositLimitValidator.setNext(null);
-
+    public AtmService() {
         atmCachDispenser = new AtmCashDispenser();
+    }
+
+
+    public void setBankService(SBIBankService bankService) {
+        this.bankService = bankService;
+        // state state factory
+        atmStateFactory = new AtmStateFactoryImpl(this, bankService);
     }
 
     @Override
@@ -41,21 +48,12 @@ public class AtmService implements Atm{
 
     @Override
     public void withdraw(String accountNo, double amount) {
-        Account account = bankService.accountList.get(accountNo);
-       if( account!=null &&  cashAvailabilityValidator.validate(account, amount)){
-           bankService.processTransaction(new WithdrawTransaction("txnID", 500.0, account));
-           AtmCashDispenser.debitCashInAtm(amount);
-
-        }
+        atmState.withdraw(accountNo, amount);
     }
 
     @Override
     public void deposit(String accountNo, double amount) {
-        Account account = bankService.accountList.get(accountNo);
-        if( account!=null &&  depositLimitValidator.validate(account, amount)) {
-            bankService.processTransaction(new DepositTransaction("txnID", 500.0, account));
-            AtmCashDispenser.debitCashInAtm(amount);
-        }
+        atmState.deposit(accountNo, amount);
     }
 
     @Override
@@ -70,6 +68,13 @@ public class AtmService implements Atm{
         if(currentBalance >= amount) return true;
         return false;
     }
+
+    @Override
+    public void changeCurrentState(ATMStates newState) {
+        this.atmState = atmStateFactory.createState(newState);
+    }
+
+
 
 
 }

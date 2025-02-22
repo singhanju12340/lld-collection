@@ -1,5 +1,6 @@
 package com.machineCode.splitwise.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  */
 
 @Data
+@JsonIgnoreProperties
 public class User {
     String id;
     String name;
