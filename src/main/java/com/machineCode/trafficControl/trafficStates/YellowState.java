@@ -18,4 +18,5 @@ public class YellowState implements TrafficLightState {
     public Signal getStateName() {
         return Signal.YELLOW;
     }
+
 }
