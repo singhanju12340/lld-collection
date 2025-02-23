@@ -32,7 +32,7 @@ public class SBIBankService{
     }
 
     public Account getAccount(String accountNumber) {
-        accountList.get(accountNumber);
+        return accountList.get(accountNumber);
     }
 
 

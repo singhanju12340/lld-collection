@@ -1,9 +1,6 @@
 package com.machineCode.ATM;
 
 import com.machineCode.ATM.atm_states.*;
-import com.machineCode.ATM.transactionValidation.CashAvailabilityValidator;
-import com.machineCode.ATM.transactionValidation.DepositLimitValidator;
-import com.machineCode.ATM.transactionValidation.SufficientBalanceValidator;
 
 /**
  * @author anju
