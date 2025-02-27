@@ -13,9 +13,9 @@ public class PrototypeDemo {
         House houseNew = house.deepClone();
         houseNew.addFeature("lawn");
 
-        System.out.println(house.toString());
+        System.out.println(house);
 
-        System.out.println(houseNew.toString());
+        System.out.println(houseNew);
 
 
     }
