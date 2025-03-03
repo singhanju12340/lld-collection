@@ -6,9 +6,16 @@ package com.machineCode.inmemory_cache.eviction_policy;
  */
 public interface FastCacheEvictionPolicy<K> {
 
-//    public void remove(K key);
 
-    void evictionKey();
+
+    K getEvictKey();
+
+    void updateOnAccess(K key);
+
+    void updateOnInsert(K key);
+
+
+
 
 
 }

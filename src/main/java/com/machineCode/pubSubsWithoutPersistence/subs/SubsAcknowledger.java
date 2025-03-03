@@ -10,21 +10,21 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SubsAcknowledger {
 
-    Map<String, Map<Subscriber, Integer>> topicSubscriberIndexTracker;
+    Map<String, TopicSubscriber> topicSubscriberIndexTracker;
 
     public SubsAcknowledger() {
         this.topicSubscriberIndexTracker = new ConcurrentHashMap<>();
     }
 
-    public void acknowledge(String topic, Subscriber subscriber , int lastIndex){
-        topicSubscriberIndexTracker.putIfAbsent(topic, new HashMap<>());
-        topicSubscriberIndexTracker.get(topic).put(subscriber, lastIndex);
+    public void acknowledge(String topic, Subscriber subscriber){
+        topicSubscriberIndexTracker.putIfAbsent(topic, new TopicSubscriber(subscriber));
+        topicSubscriberIndexTracker.get(topic).updateOffset();
     }
 
     public int getLastIndex(String topic, Subscriber subscriber){
         if(!topicSubscriberIndexTracker.containsKey(topic))
             return -1;
-        return topicSubscriberIndexTracker.get(topic).get(subscriber);
+        return topicSubscriberIndexTracker.get(topic).updateOffset();
     }
 
 }

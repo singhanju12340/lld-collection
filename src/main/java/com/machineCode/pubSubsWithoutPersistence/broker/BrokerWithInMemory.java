@@ -55,7 +55,7 @@ public class BrokerWithInMemory implements Broker {
         int lastUnreadIndex = subsAcknowledger.getLastIndex(topic, subscriber);
         for (Message message :messageStore.getMessage(topic)) {
             subscriber.consume(message);
-            subsAcknowledger.acknowledge(topic, subscriber, lastUnreadIndex+1);
+            subsAcknowledger.acknowledge(topic, subscriber);
         }
     }
 

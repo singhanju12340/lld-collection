@@ -2,7 +2,8 @@ package com.machineCode.inmemory_cache;
 
 
 
-import java.time.Instant;
+import com.machineCode.inmemory_cache.eviction_policy.FastLRUEvictionCache;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class FastLRUCache<K,V> implements FastCache<K,V>  {
 
-     public Map<K,CacheValue<V>> cacheEntries;
+     public Map<K,V> cacheEntries;
 
     int maxCacheSize;
     int ttl; // in milli sec
@@ -25,16 +26,18 @@ public class FastLRUCache<K,V> implements FastCache<K,V>  {
 
     private static FastLRUCache fastLRUCache;
 
-    Map<K,CacheValue<V>> backUpCacheEntries;
+    public Map<K,V>  backUpCacheEntries;
+    FastLRUEvictionCache<K,V> fastLRUEvictionCache;
 
 
 
     private FastLRUCache( int maxCacheSize, int ttl) {
-        this.cacheEntries = new LinkedHashMap<K, CacheValue<V>>(maxCacheSize, 0.75f, true);
-        this.backUpCacheEntries = new LinkedHashMap<K, CacheValue<V>>(maxCacheSize, 0.75f, true);
+        this.cacheEntries = new LinkedHashMap<K, V>(maxCacheSize, 0.75f, true);
+        this.backUpCacheEntries = new LinkedHashMap<K, V>(maxCacheSize, 0.75f, true);
         this.maxCacheSize = maxCacheSize;
         this.ttl = ttl;
         cleaner.scheduleAtFixedRate(this::removeExpiredKeys, ttl, ttl, TimeUnit.MILLISECONDS);
+        this.fastLRUEvictionCache = new FastLRUEvictionCache<>();
     }
 
     public static FastLRUCache getInstance(){
@@ -48,31 +51,26 @@ public class FastLRUCache<K,V> implements FastCache<K,V>  {
 
     @Override
     public synchronized void put(K key, V value) {
-        if(cacheEntries.size() == maxCacheSize)
-            cacheEntries.remove(cacheEntries.keySet().iterator().next());
-
-        CacheValue<V> cacheValue = new CacheValue<>();
-        cacheValue.setValue( value);
-        cacheValue.setLastAccessedTime(Instant.now().toEpochMilli());
-        cacheEntries.put(key, cacheValue);
+        if(cacheEntries.size() >= maxCacheSize){
+            K oldKey = fastLRUEvictionCache.getEvictKey();
+            backUpCacheEntries.put(oldKey, cacheEntries.get(oldKey));
+            cacheEntries.remove(oldKey);
+        }
+        cacheEntries.put(key, value);
+        fastLRUEvictionCache.updateOnInsert(key);
     }
 
     @Override
     public V get(K key) {
-        CacheValue<V> value = cacheEntries.get(key);
+        V value = cacheEntries.get(key);
         if(value == null){
             if(backUpCacheEntries.containsKey(key))
-                return backUpCacheEntries.get(key).getValue();
+                return backUpCacheEntries.get(key);
             else return null;
+        }else{
+            fastLRUEvictionCache.updateOnAccess(key);
+            return value;
         }
-        // if recently expired add it in backup cache
-        if (isExpired(value)) {
-            backUpCacheEntries.put(key, value);
-            cacheEntries.remove(key);
-            return value.getValue();
-        }
-        value.setLastAccessedTime(Instant.now().toEpochMilli());
-        return value.getValue();
     }
 
     @Override
@@ -82,20 +80,20 @@ public class FastLRUCache<K,V> implements FastCache<K,V>  {
 
 
 
-
-
-    private synchronized boolean isExpired(CacheValue<V> entry) {
+    private synchronized boolean isExpired(CacheKey<K> entry) {
         return (System.currentTimeMillis() - entry.getLastAccessedTime()) >= ttl;
     }
 
 
     private void removeExpiredKeys(){
-        Iterator<Map.Entry<K, CacheValue<V>>> iterator = cacheEntries.entrySet().iterator();
+        Iterator<Map.Entry<CacheKey<K>, Boolean>> iterator = fastLRUEvictionCache.getCacheEvictionData().entrySet().iterator();
+
         while (iterator.hasNext()) {
-            Map.Entry<K, CacheValue<V>> entry = iterator.next();
-            if (isExpired(entry.getValue())) {
-                System.out.println("removed key" + entry.getValue().getValue());
-                backUpCacheEntries.put(entry.getKey(), entry.getValue()); // moved to backup store
+            Map.Entry<CacheKey<K>, Boolean> entry = iterator.next();
+            if (isExpired(entry.getKey())) {
+                System.out.println("removed key" + entry.getKey().getKey());
+                backUpCacheEntries.put(entry.getKey().getKey(), cacheEntries.get(entry.getKey())); // moved to backup store
+                cacheEntries.remove(entry.getKey().getKey()); // remove from primary store
                 iterator.remove();
             }
         }

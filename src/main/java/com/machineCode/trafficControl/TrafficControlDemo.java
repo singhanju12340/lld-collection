@@ -8,6 +8,8 @@ public class TrafficControlDemo {
 
 
     public static void main(String[] args) throws InterruptedException {
+    
+
         TrafficController trafficController = TrafficController.getInstant();
 
         // Create roads
@@ -18,6 +20,8 @@ public class TrafficControlDemo {
 
         // Create traffic lights
         TrafficLight trafficLight1 = new TrafficLight("L1", 6000, 3000, 9000);
+        trafficLight1.registerObserver(new TrafficSensor());
+
         TrafficLight trafficLight2 = new TrafficLight("L2", 6000, 3000, 9000);
         TrafficLight trafficLight3 = new TrafficLight("L3", 6000, 3000, 9000);
         TrafficLight trafficLight4 = new TrafficLight("L4", 6000, 3000, 9000);
@@ -33,6 +37,7 @@ public class TrafficControlDemo {
         trafficController.addRoads(road2);
         trafficController.addRoads(road3);
         trafficController.addRoads(road4);
+
 
         // Start traffic control
         trafficController.startTrafficControl();

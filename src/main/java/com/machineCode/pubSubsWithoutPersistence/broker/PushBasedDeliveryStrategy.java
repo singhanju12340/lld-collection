@@ -38,7 +38,7 @@ public class PushBasedDeliveryStrategy implements DeliveryStrategy{
                         return false;
                     }
                 });
-                subsAcknowledger.acknowledge(topic, subscriber, i);
+                subsAcknowledger.acknowledge(topic, subscriber);
             }
         }
 
