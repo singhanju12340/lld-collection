@@ -1,4 +1,4 @@
-package com.machineCode.inmemory_cache;
+package com.machineCode.inmemory_cache_writePolicy;
 
 /**
  * @author anju

@@ -1,4 +1,5 @@
-package com.machineCode.inmemory_cache;
+package com.machineCode.inmemory_cache_writePolicy;
+
 
 /**
  * @author anju
@@ -6,7 +7,7 @@ package com.machineCode.inmemory_cache;
  */
 public class FastCacheDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         FastLRUCache<String, String> myFastCache = FastLRUCache.getInstance();
         myFastCache.put("Key1", "Value1");
         myFastCache.put("Key2", "Value2");
@@ -18,7 +19,13 @@ public class FastCacheDemo {
         System.out.println(myFastCache.get("Key1"));
 
 
+        Thread.sleep(100000);
+        System.out.println( myFastCache.get("Key3"));
+
+
 
 
     }
+
+
 }

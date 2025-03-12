@@ -1,17 +1,18 @@
-package com.machineCode.inmemory_cache.eviction_policy;
+package com.machineCode.inmemory_cache_writePolicy.eviction_policy;
 
 
-import com.machineCode.inmemory_cache.CacheKey;
 
+import com.machineCode.inmemory_cache_writePolicy.CacheKey;
 import java.time.Instant;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 
 /**
  * @author anju
  * @created on 25/02/25 and 6:44 PM
  */
-public class FastLRUEvictionCache<K,V> implements FastCacheEvictionPolicy<K>{
+public class FastLRUEvictionCache<K> implements FastCacheEvictionPolicy<K>{
     // DS to keep data for accessing and updating w.r.t least recently used
     LinkedHashMap<CacheKey<K>, Boolean> cacheEvictionData;
 
@@ -50,6 +51,23 @@ public class FastLRUEvictionCache<K,V> implements FastCacheEvictionPolicy<K>{
         cacheEvictionData.put(cacheKey, true);
 
     }
+
+    @Override
+    public Set<CacheKey<K>> getCacheEntries() {
+        return cacheEvictionData.keySet();
+
+    }
+
+    @Override
+    public K remove(K key) {
+        for (CacheKey<K> CurrentKey:cacheEvictionData.keySet()) {
+            if(CurrentKey.getKey().equals(key))
+                cacheEvictionData.remove(CurrentKey);
+        }
+
+        return key;
+    }
+
 
 
 }
