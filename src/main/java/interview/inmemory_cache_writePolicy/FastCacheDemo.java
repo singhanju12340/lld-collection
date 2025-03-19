@@ -1,4 +1,5 @@
-package com.machineCode.inmemory_cache_writePolicy;
+package interview.inmemory_cache_writePolicy;
+
 
 
 /**
@@ -19,9 +20,10 @@ public class FastCacheDemo {
         System.out.println(myFastCache.get("Key1"));
 
 
-        Thread.sleep(100000);
-        System.out.println( myFastCache.get("Key3"));
+        myFastCache.removeExpiredKeys();
 
+        Thread.sleep(10);
+        System.out.println( myFastCache.get("Key3"));
 
 
 

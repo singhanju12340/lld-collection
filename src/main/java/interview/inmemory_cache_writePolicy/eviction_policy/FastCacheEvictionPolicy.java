@@ -1,6 +1,7 @@
-package com.machineCode.inmemory_cache_writePolicy.eviction_policy;
+package interview.inmemory_cache_writePolicy.eviction_policy;
 
-import com.machineCode.inmemory_cache_writePolicy.CacheKey;
+
+import interview.inmemory_cache_writePolicy.CacheKey;
 
 import java.util.Set;
 
@@ -10,9 +11,13 @@ import java.util.Set;
  */
 public interface FastCacheEvictionPolicy<K> {
     K getEvictKey();
+
     void updateOnAccess(K key);
+
     void updateOnInsert(K key);
+
     public Set<CacheKey<K>> getCacheEntries();
+
     K remove(K key);
 
 

@@ -1,8 +1,10 @@
-package com.machineCode.inmemory_cache_writePolicy.eviction_policy;
+package interview.inmemory_cache_writePolicy.eviction_policy;
 
 
 
-import com.machineCode.inmemory_cache_writePolicy.CacheKey;
+
+import interview.inmemory_cache_writePolicy.CacheKey;
+
 import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.Set;
@@ -12,7 +14,7 @@ import java.util.Set;
  * @author anju
  * @created on 25/02/25 and 6:44 PM
  */
-public class FastLRUEvictionCache<K> implements FastCacheEvictionPolicy<K>{
+public class FastLRUEvictionCache<K> implements FastCacheEvictionPolicy<K> {
     // DS to keep data for accessing and updating w.r.t least recently used
     LinkedHashMap<CacheKey<K>, Boolean> cacheEvictionData;
 

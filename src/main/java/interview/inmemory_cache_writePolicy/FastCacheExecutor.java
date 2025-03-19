@@ -1,8 +1,8 @@
-package com.machineCode.inmemory_cache_writePolicy;
+package interview.inmemory_cache_writePolicy;
 
 
-import com.machineCode.inmemory_cache_writePolicy.writePolicy.WritePolicy;
-import com.machineCode.inmemory_cache_writePolicy.writePolicy.WritePolicyCacheDecorator;
+import interview.inmemory_cache_writePolicy.writePolicy.WritePolicy;
+import interview.inmemory_cache_writePolicy.writePolicy.WritePolicyCacheDecorator;
 
 /**
  * @author anju

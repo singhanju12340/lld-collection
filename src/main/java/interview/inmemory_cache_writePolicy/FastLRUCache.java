@@ -1,10 +1,11 @@
-package com.machineCode.inmemory_cache_writePolicy;
+package interview.inmemory_cache_writePolicy;
 
 
 
 
-import com.machineCode.inmemory_cache_writePolicy.eviction_policy.FastCacheEvictionPolicy;
-import com.machineCode.inmemory_cache_writePolicy.eviction_policy.FastLRUEvictionCache;
+
+import interview.inmemory_cache_writePolicy.eviction_policy.FastCacheEvictionPolicy;
+import interview.inmemory_cache_writePolicy.eviction_policy.FastLRUEvictionCache;
 
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @author anju
  * @created on 25/02/25 and 6:43 PM
  */
-public class FastLRUCache<K,V> implements FastCache<K,V>  {
+public class FastLRUCache<K,V> implements FastCache<K,V> {
 
      public Map<K,V> cacheEntries;
 
@@ -83,12 +84,12 @@ public class FastLRUCache<K,V> implements FastCache<K,V>  {
     }
 
 
-    private void removeExpiredKeys(){
+    public void removeExpiredKeys(){
         Set<CacheKey<K>> keys = fastLRUEvictionCache.getCacheEntries();
 
         for (CacheKey<K> key : keys) {
             if (isExpired(key)) {
-                System.out.println("removed key" + key.getKey());
+                System.out.println("removed key: " + key.getKey());
                 cacheEntries.remove(key.getKey()); // remove from primary store
                 fastLRUEvictionCache.remove(key.getKey());
             }

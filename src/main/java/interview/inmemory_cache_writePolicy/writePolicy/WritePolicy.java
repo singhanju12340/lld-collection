@@ -1,4 +1,4 @@
-package com.machineCode.inmemory_cache_writePolicy.writePolicy;
+package interview.inmemory_cache_writePolicy.writePolicy;
 
 /**
  * @author anju

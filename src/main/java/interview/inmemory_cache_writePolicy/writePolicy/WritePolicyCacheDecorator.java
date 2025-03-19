@@ -1,8 +1,9 @@
-package com.machineCode.inmemory_cache_writePolicy.writePolicy;
+package interview.inmemory_cache_writePolicy.writePolicy;
 
 
-import com.machineCode.inmemory_cache_writePolicy.FastCache;
-import com.machineCode.inmemory_cache_writePolicy.PersistenceStorage;
+
+import interview.inmemory_cache_writePolicy.FastCache;
+import interview.inmemory_cache_writePolicy.PersistenceStorage;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -68,5 +69,10 @@ public class WritePolicyCacheDecorator<K,V> implements FastCache<K,V> {
         if(scheduler != null){
             scheduler.shutdown();
         }
+    }
+
+
+    public void load(){
+        // load full list from database to cache
     }
 }

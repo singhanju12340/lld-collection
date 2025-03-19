@@ -1,4 +1,4 @@
-package com.machineCode.inmemory_cache_writePolicy;
+package interview.inmemory_cache_writePolicy;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
