@@ -13,6 +13,10 @@ public class PaymentRequest {
     private String paymentMethod; // e.g., "CREDIT_CARD", "DIGITAL_WALLET"
     private Map<String, String> details; // e.g., cardNumber, expiry, token, etc.
 
+    public PaymentRequest(){
+
+    }
+
     public PaymentRequest(double amount, String currency, String paymentMethod, Map<String, String> details) {
         this.amount = amount;
         this.currency = currency;
