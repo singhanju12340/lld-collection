@@ -1,0 +1,12 @@
+package com.machineCode.SqlLikeDb.model.constraint;
+
+/**
+ * @author anju
+ * @created on 17/04/25 and 11:17 PM
+ */
+public class StringConstraint implements Constraints{
+    @Override
+    public boolean validate(Object object) {
+        return object.getClass().equals(String.class) && object.toString().length() <=20;
+    }
+}

@@ -1,0 +1,25 @@
+@startuml
+!pragma layout smetana
+
+abstract Constraint
+interface Filer
+
+Database *-- Table
+Table *-- Schema
+Table *-- Record
+Record *-- Column
+
+Column o-- Constraint
+
+Constraint <|-- StringContraint
+Constraint <|-- IntegerContraint
+Constraint <|-- NotNullContraint
+
+Filer <|-- EqualFilter
+Filer <|-- NotEqualFilter
+
+Class07 .. Class08
+Class09 -- Class10
+
+
+@enduml
