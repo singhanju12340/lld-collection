@@ -1,6 +1,6 @@
-package com.machineCode.eCommerceApp.model;
+package com.machineCode.eCommerceAppImproved.model;
 
-import com.machineCode.paymentWallet.TxnType;
+import com.machineCode.eCommerceAppImproved.model.PaymentMode;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,7 +16,7 @@ public class Order {
     private final String userId;
     private final String productId;
     private final Integer quantity;
-    private final Double billAmount;
+    private Double billAmount;
     private final PaymentMode paymentMode;
     private final Long date;
     private final String userPinCode;
@@ -24,6 +24,5 @@ public class Order {
     public void setOrderId(String newId) {
         this.orderId = newId;
     }
-
 
 }

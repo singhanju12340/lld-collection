@@ -1,18 +1,14 @@
-package com.machineCode.loggerSystem.message;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.machineCode.loggerSystem.model;
 
 /**
  * @author anju
  * @created on 01/02/25 and 10:45 AM
  */
 public enum LogLevel {
-    INFO("INFO",2),
     DEBUG("DEBUG",1),
+    INFO("INFO",2),
     WARN("WARN",3),
     ERROR("ERROR",4);
-
 
     String levelName;
     Integer order;
@@ -20,10 +16,6 @@ public enum LogLevel {
 
     public String getLevelName() {
         return levelName;
-    }
-
-    public void setLevelName(String levelName) {
-        this.levelName = levelName;
     }
 
     public Integer getOrder() {

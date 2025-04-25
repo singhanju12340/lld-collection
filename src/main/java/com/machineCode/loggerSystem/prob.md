@@ -21,14 +21,19 @@ Observer Pattern - For handling multiple log sinks (console, file, etc.)
 
 
 
-
-![](../../../../../../../../../../../var/folders/5_/jbhlv8y54ds7bk9v5fd22rxc0000gp/T/TemporaryItems/NSIRD_screencaptureui_owo2Nh/Screenshot 2025-04-24 at 9.43.39 PM.png)
-
+![](../../../../../../../../../../../var/folders/5_/jbhlv8y54ds7bk9v5fd22rxc0000gp/T/TemporaryItems/NSIRD_screencaptureui_cElC4n/Screenshot 2025-04-24 at 9.45.59 PM.png)
 
 
 
 
 
+DEBUG level shows DEBUG + INFO + WARN + ERROR
+
+INFO level shows INFO + WARN + ERROR
+
+WARN level shows WARN + ERROR
+
+ERROR level shows only ERROR
 
 
 Problem Statement:
@@ -117,7 +122,7 @@ Command : SET_LOG_LEVEL INFO
 
 Command : LOG_MESSAGE INFO “this is a info message” “classroomhandler.go”
 Output :
-	CONSOLE INFO “this is a info message” “classroomhandler.go”
+CONSOLE INFO “this is a info message” “classroomhandler.go”
 
 Command : LOG_MESSAGE ERROR “this is an error message” “classroomhandler.go”
 Output : FILE ERROR “this is an error message” “classroomhandler.go”
