@@ -1,13 +1,8 @@
 package com.machineCode.loggerSystem.service;
 
-import com.machineCode.loggerSystem.model.LogLevel;
-import com.machineCode.loggerSystem.service.chaining.*;
-import com.machineCode.loggerSystem.service.decorator.TimeDecorator;
-import com.machineCode.loggerSystem.service.impl.Logger;
-import com.machineCode.loggerSystem.service.observer.ConsoleLogObserver;
-import com.machineCode.loggerSystem.service.observer.FileLogObserver;
-
-import static com.machineCode.loggerSystem.model.LogLevel.*;
+import com.machineCode.loggerSystem.service.observer.AppenderFactory;
+import com.machineCode.loggerSystem.service.observer.LogAppender;
+import com.machineCode.loggerSystem.utils.AppenderConfig;
 
 /**
  * @author anju
@@ -15,33 +10,36 @@ import static com.machineCode.loggerSystem.model.LogLevel.*;
  */
 public class LogManager {
 
-//    public static BaseLogger dologChaining(){
-//
-//
-//        BaseLogger debugLogger = new DebugLogger(DEBUG.getOrder());
-//        BaseLogger infoLogger = new InfoLogger(INFO.getOrder());
-//        BaseLogger errorLogger = new ErrorLogger(ERROR.getOrder());
-//        BaseLogger warnLogger = new WarnLogger(WARN.getOrder());
-//
-//        debugLogger.setNextLogger(infoLogger);
-//        infoLogger.setNextLogger(warnLogger);
-//        warnLogger.setNextLogger(errorLogger);
-//        errorLogger.setNextLogger(null);
-//        // set system log level
-//        return debugLogger; // return first logger in the chain
-//    }
 
-    public static LogSinkHandler addObservers(){
-        LogSinkHandler logSinkHandler = new LogSinkHandler();
-        ConsoleLogObserver consoleLogger = new ConsoleLogObserver();
-        logSinkHandler.registerLogSink(INFO.getOrder(),consoleLogger);
-        logSinkHandler.registerLogSink(DEBUG.getOrder(),consoleLogger);
-        logSinkHandler.registerLogSink(ERROR.getOrder(),consoleLogger);
-        logSinkHandler.registerLogSink(WARN.getOrder(),consoleLogger);
+    public static LogAppendHandler addObservers(){
+        BaseLogger.level = 2;
 
 
-        FileLogObserver fileLogger = new FileLogObserver("abc.log");
-        logSinkHandler.registerLogSink(INFO.getOrder(),fileLogger);
+        LogAppendHandler logSinkHandler = new LogAppendHandler();
+
+        //console appender config
+        AppenderConfig consoleLoggerConfig = new AppenderConfig();
+        consoleLoggerConfig.setType("ConsoleAppender");
+
+        // file appender config
+        AppenderConfig fileLoggerConfig = new AppenderConfig();
+        fileLoggerConfig.setFilePath("abc.log");
+        fileLoggerConfig.setType("FileAppender");
+        fileLoggerConfig.setName("Async File Appender");
+
+        AppenderFactory factory = new   AppenderFactory();
+
+        LogAppender consoleLogAppender = factory.createAppender(consoleLoggerConfig);
+        LogAppender fileLogAppender = factory.createAppender(fileLoggerConfig);
+
+
+//        logSinkHandler.registerLogAppender(INFO.getOrder(),consoleLogAppender);
+
+        logSinkHandler.registerLogAppender(BaseLogger.level,consoleLogAppender);
+
+
+        logSinkHandler.registerLogAppender(4,fileLogAppender);
+
         return logSinkHandler;
     }
 
