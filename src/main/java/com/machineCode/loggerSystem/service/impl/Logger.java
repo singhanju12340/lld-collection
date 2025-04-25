@@ -14,7 +14,7 @@ import com.machineCode.loggerSystem.service.decorator.TimeDecorator;
 
 public class Logger implements LogService {
     private static Logger logger;
-    private volatile static BaseLogger chainOfLogger;
+    private volatile static BaseLogger baseLogger;
     private volatile static LogSinkHandler logSinkHandler;
     private static LogService decoratedLogger;
 
@@ -23,22 +23,22 @@ public class Logger implements LogService {
         LogService logService = new LogService() {
             @Override
             public void info(String message) {
-                chainOfLogger.logMessage(LogLevel.INFO.getOrder(), message, logSinkHandler);
+                baseLogger.logMessage(LogLevel.INFO.getOrder(), message, logSinkHandler);
             }
 
             @Override
             public void debug(String message) {
-                chainOfLogger.logMessage(LogLevel.DEBUG.getOrder(), message, logSinkHandler);
+                baseLogger.logMessage(LogLevel.DEBUG.getOrder(), message, logSinkHandler);
             }
 
             @Override
             public void warn(String message) {
-                chainOfLogger.logMessage(LogLevel.WARN.getOrder(), message, logSinkHandler);
+                baseLogger.logMessage(LogLevel.WARN.getOrder(), message, logSinkHandler);
             }
 
             @Override
             public void error(String message) {
-                chainOfLogger.logMessage(LogLevel.ERROR.getOrder(), message, logSinkHandler);
+                baseLogger.logMessage(LogLevel.ERROR.getOrder(), message, logSinkHandler);
             }
         };
 
@@ -50,7 +50,7 @@ public class Logger implements LogService {
             synchronized (Logger.class) {
                 if (logger == null) {
                     // Initialize the logger and other components here
-                    chainOfLogger = LogManager.dologChaining();
+                    baseLogger = new BaseLogger();
                     logSinkHandler = LogManager.addObservers();
                     logger = new Logger();
                 }

@@ -6,4 +6,6 @@ package com.machineCode.loggerSystem.service.observer;
  */
 public interface LogObserver {
     public void log(String message) ;
-    }
+
+
+}
