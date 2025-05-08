@@ -1,6 +1,6 @@
 package com.machineCode.loggerSystem.service.observer;
 
-import com.machineCode.loggerSystem.service.pattern.Pattern;
+import com.machineCode.loggerSystem.service.logPattern.Pattern;
 
 /**
  * @author anju

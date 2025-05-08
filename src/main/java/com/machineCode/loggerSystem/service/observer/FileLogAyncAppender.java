@@ -1,13 +1,12 @@
 package com.machineCode.loggerSystem.service.observer;
 
 import com.machineCode.loggerSystem.exception.CustomLoggerException;
-import com.machineCode.loggerSystem.service.pattern.Pattern;
+import com.machineCode.loggerSystem.service.logPattern.Pattern;
 import com.machineCode.loggerSystem.utils.ErrorCode;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.io.RandomAccessFile;
 import java.util.concurrent.*;
 
 /**
@@ -36,6 +35,7 @@ public class FileLogAyncAppender implements LogAppender {
                         String message = buffer.poll(100, TimeUnit.SECONDS);
                         if (message != null) {
                             writer.write(message + "\n");
+                            writer.flush();
                         }
                     }
                 } catch (Exception e) {

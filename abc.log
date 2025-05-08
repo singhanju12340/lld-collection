@@ -1,0 +1,41 @@
+INFO : info  mesasge
+INFO : after debug set up, info mesasge
+INFO : info  mesasge
+DEBUG : debug mesasge
+INFO : after debug set up, info mesasge
+DEBUG : after debug set up, debug mesasge
+INFO : info  mesasge
+DEBUG : debug mesasge
+INFO : after debug set up, info mesasge
+DEBUG : after debug set up, debug mesasge
+INFO : info  mesasge
+WARN : warning mesasge
+INFO : after debug set up, info mesasge
+WARN : after warn set up, warning mesasge
+ERROR : after warn set up, error mesasge
+INFO : info  mesasge
+WARN : warning mesasge
+INFO : after debug set up, info mesasge
+WARN : after warn set up, warning mesasge
+ERROR : after warn set up, error mesasge
+INFO : info  mesasge
+DEBUG : debug mesasge
+INFO : after debug set up, info mesasge
+DEBUG : after debug set up, debug mesasge
+INFO : info  mesasge
+WARN : warning mesasge
+INFO : after debug set up, info mesasge
+WARN : after warn set up, warning mesasge
+ERROR : after warn set up, error mesasge
+WARN : warning mesasge
+WARN : after warn set up, warning mesasge
+ERROR : after warn set up, error mesasge
+WARN : warning mesasge
+WARN : after warn set up, warning mesasge
+ERROR : after warn set up, error mesasge
+WARN : warning mesasge
+WARN : after warn set up, warning mesasge
+ERROR : after error set up, error mesasge
+WARN : warning mesasge
+WARN : after warn set up, warning mesasge
+ERROR : after error set up, error mesasge

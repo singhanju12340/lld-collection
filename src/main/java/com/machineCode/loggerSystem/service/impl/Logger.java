@@ -1,11 +1,10 @@
 package com.machineCode.loggerSystem.service.impl;
 
 import com.machineCode.loggerSystem.model.LogLevel;
-import com.machineCode.loggerSystem.model.LogMessage;
-import com.machineCode.loggerSystem.service.LogManager;
+import com.machineCode.loggerSystem.service.LogDataManager;
 import com.machineCode.loggerSystem.service.LogService;
 import com.machineCode.loggerSystem.service.LogAppendHandler;
-import com.machineCode.loggerSystem.service.BaseLogger;
+import com.machineCode.loggerSystem.service.chain.BaseLogger;
 
 /**
  * @author anju
@@ -24,8 +23,8 @@ public class Logger implements LogService {
             synchronized (Logger.class) {
                 if (logger == null) {
                     // Initialize the logger and other components here
-                    baseLogger = new BaseLogger();
-                    logSinkHandler = LogManager.addObservers();
+                    baseLogger = LogDataManager.doChaining();
+                    logSinkHandler = LogDataManager.addObservers();
                     logger = new Logger();
                 }
             }

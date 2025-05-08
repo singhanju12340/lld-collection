@@ -2,11 +2,13 @@ package com.machineCode.splitwise;
 
 import com.machineCode.splitwise.models.Expense;
 import com.machineCode.splitwise.models.User;
+import com.machineCode.splitwise.models.UserGroup;
+import com.machineCode.splitwise.repository.UserGroupRepository;
+import com.machineCode.splitwise.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * @author anju
@@ -15,6 +17,9 @@ import java.util.Map;
 public class ExpenseDataManager {
 
     private static ExpenseDataManager expenseDataManager;
+    private static UserRepository userRepository;
+    private static UserGroupRepository userGroupRepository;
+
 
     public synchronized static ExpenseDataManager getInstance(){
         if(expenseDataManager == null)
@@ -24,25 +29,21 @@ public class ExpenseDataManager {
 
     List<Expense> expenses;
     // userMap: userId to User
-    Map<String, User> userMap;
-    Map<User, Map<User, Double>> balanceSheet;
 
     public ExpenseDataManager() {
         this.expenses = new ArrayList<Expense>();
-        this.userMap = new HashMap<String, User>();
-        this.balanceSheet = new HashMap<User, Map<User, Double>>();
+        userRepository = new UserRepository();
+        userGroupRepository = new UserGroupRepository();
     }
 
-
-    public void addExpense(){
-
+    public static void loadUser(){
+        userRepository.addUser(new User("user1", "anju"));
+        userRepository.addUser(new User("user2", "manju"));
+        userRepository.addUser(new User("user3", "sanju"));
     }
 
-    public void addUser(User user){
-        userMap.put(user.getId(), user);
+    public Set<UserGroup> getAllUserGroups(String userId){
+        return userGroupRepository.getAllGroupOfUser(userId);
     }
 
-    public void showBalanceSheetForUser(){
-
-    }
 }

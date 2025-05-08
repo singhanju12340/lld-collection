@@ -13,6 +13,11 @@ public class Split {
     String userId;
     double amount;
 
+    public Split(String userId){
+        this.amount = 0.0;
+        this.userId = userId;
+    }
+
     Split(String userId, double amount){
         this.amount = amount;
         this.userId = userId;

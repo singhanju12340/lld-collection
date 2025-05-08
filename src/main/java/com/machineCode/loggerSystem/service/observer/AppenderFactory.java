@@ -1,6 +1,6 @@
 package com.machineCode.loggerSystem.service.observer;
 
-import com.machineCode.loggerSystem.service.pattern.TimeLevelPattern;
+import com.machineCode.loggerSystem.service.logPattern.TimeLevelPattern;
 import com.machineCode.loggerSystem.utils.AppenderConfig;
 
 /**

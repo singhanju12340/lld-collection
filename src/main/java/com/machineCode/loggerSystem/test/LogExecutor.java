@@ -1,6 +1,5 @@
 package com.machineCode.loggerSystem.test;
 
-import com.machineCode.loggerSystem.service.BaseLogger;
 import com.machineCode.loggerSystem.service.impl.Logger;
 
 
@@ -39,9 +38,7 @@ public class LogExecutor {
         logger.debug("after debug set up, debug mesasge");
 
         logger.warn("after warn set up, warning mesasge");
-        logger.error("after warn set up, error mesasge");
-
-
+        logger.error("after error set up, error mesasge");
     }
 
 

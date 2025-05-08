@@ -3,6 +3,8 @@ package com.machineCode.splitwise.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import java.time.Instant;
+
 /**
  * @author anju
  * @created on 01/08/24 and 11:57 AM
@@ -11,15 +13,28 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties
 public class User {
-    String id;
-    String name;
-    String email;
-    Long createdDate;
+    private String id;
+    private String name;
+    private String email;
+    private Long createdDate;
+    private double overallBalance;
 
-    public User(String id, String name, Long createDate){
+    public User(String id, String name){
         this.id = id;
         this.name = name;
-        this.createdDate = createDate;
+        this.createdDate = Instant.now().getEpochSecond();
+    }
+
+    public User(String id, String name, String email){
+        this.id = id;
+        this.name = name;
+        this.createdDate = Instant.now().getEpochSecond();
+    }
+
+    public User(String id, String name, Long email){
+        this.id = id;
+        this.name = name;
+        this.createdDate = Instant.now().getEpochSecond();
     }
 
     public String getId() {

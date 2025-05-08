@@ -3,6 +3,8 @@ package com.machineCode.splitwise.services;
 import com.machineCode.splitwise.models.Expense;
 import com.machineCode.splitwise.models.Split;
 import com.machineCode.splitwise.models.SplitType;
+import com.machineCode.splitwise.services.strategy.EqualSplitStrategy;
+import com.machineCode.splitwise.services.strategy.SplitStrategy;
 
 import java.util.List;
 import java.util.Map;
@@ -23,12 +25,11 @@ public class SplitServiceFactory{
         return serviceFactory;
     }
 
-    private Map<SplitType, SplitService> splitServiceMap;
+    private Map<SplitType, SplitStrategy> splitServiceMap;
 
     SplitServiceFactory(){
-        splitServiceMap.put(EQUAL, EqualSplitServiceImpl.getInstance());
-        splitServiceMap.put(EXACT, ExactSplitServiceImpl.getInstance());
-        splitServiceMap.put(PERCENT, PercentageSplitServiceImpl.getInstance());
+        splitServiceMap.put(EQUAL, new EqualSplitStrategy());
+
     }
 
     public List<Split> execute(SplitType type, Expense expense) throws Exception {
