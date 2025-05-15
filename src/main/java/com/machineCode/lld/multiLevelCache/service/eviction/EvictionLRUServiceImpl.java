@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
  */
 public class EvictionLRUServiceImpl<K> implements EvictionService<K>{
 
-    LinkedHashMap<K, Boolean> linkedHashMap = new LinkedHashMap<>(10, 0.75f ,true); // enable access = true
+    LinkedHashMap<K, Boolean> linkedHashMap = new LinkedHashMap<>(10, 0.75f ,true); // enable access = true, maintains accecss order
 
     @Override
     public K getEvictionKey() {

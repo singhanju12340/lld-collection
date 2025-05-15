@@ -1,4 +1,5 @@
-package com.machineCode.lld.leetCodeLLD;
+package com.machineCode.lld.leetCodeLLD.treeMap_Set_Example;
+
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -7,15 +8,38 @@ import java.util.TreeMap;
  * @author anju
  * @created on 04/02/25 and 6:07 PM
  */
+
+/***
+ * Given an empty set of intervals, implement a data structure that can:
+ *
+ * Add an interval to the set of intervals.
+ * Count the number of integers that are present in at least one interval.
+ * Implement the CountIntervals class:
+ *
+ * CountIntervals() Initializes the object with an empty set of intervals.
+ * void add(int left, int right) Adds the interval [left, right] to the set of intervals.
+ * int count() Returns the number of integers that are present in at least one interval.
+ * Note that an interval [left, right] denotes all the integers x where left <= x <= right.
+ *
+ *
+ *
+ * Example 1:
+ *
+ * Input
+ * ["CountIntervals", "add", "add", "count", "add", "count"]
+ * [[], [2, 3], [7, 10], [], [5, 8], []]
+ * Output
+ * [null, null, null, 6, null, 8]
+ */
+
 public class CountIntegerInIntervals {
+    private TreeMap<Integer, Interval> map;
+    private int totalCoverage;
 
     public CountIntegerInIntervals() {
         map = new TreeMap<>();
         totalCoverage = 0;
     }
-
-    private TreeMap<Integer, Interval> map;
-    private int totalCoverage;
 
 
     public void add(int left, int right) {
@@ -80,7 +104,13 @@ public class CountIntegerInIntervals {
         CountIntegerInIntervals countIntegerInIntervals = new CountIntegerInIntervals();
         countIntegerInIntervals.add(2,3);
         countIntegerInIntervals.add(8,9);
+
+        System.out.println(countIntegerInIntervals.count());
+
         countIntegerInIntervals.add(7,10);
+
+        System.out.println(countIntegerInIntervals.count());
+
         countIntegerInIntervals.add(5,8);
 
     }

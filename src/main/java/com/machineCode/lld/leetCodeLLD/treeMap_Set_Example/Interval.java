@@ -1,4 +1,6 @@
-package com.machineCode.lld.leetCodeLLD;
+package com.machineCode.lld.leetCodeLLD.treeMap_Set_Example;
+
+import lombok.Data;
 
 /***
  * Given an empty set of intervals, implement a data structure that can:
@@ -25,7 +27,7 @@ package com.machineCode.lld.leetCodeLLD;
 
 
 // This question is based on dynamic interval mering, can use solved using TreeMap floor() and higher() method.
-
+@Data
 class Interval {
     int start;
     int end;
@@ -34,4 +36,6 @@ class Interval {
         this.start = start;
         this.end = end;
     }
+
+
 }

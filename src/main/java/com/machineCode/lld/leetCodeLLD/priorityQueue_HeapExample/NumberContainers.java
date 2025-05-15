@@ -1,4 +1,4 @@
-package com.machineCode.lld.leetCodeLLD;
+package com.machineCode.lld.leetCodeLLD.priorityQueue_HeapExample;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -47,14 +47,11 @@ public class NumberContainers {
         indexObjMap = new HashMap<>();
     }
 
+    // {1, 10}
     public void change(int index, int number) {
-        this.orderMap.putIfAbsent(number, new PriorityQueue<>(new Comparator<NumbIndex>(){
-                    @Override
-                    public int compare(NumbIndex n1, NumbIndex n2){
-                        return n1.index - n2.index;
-                    }
-                })
-        );
+
+
+        this.orderMap.putIfAbsent(number, new PriorityQueue<>((a,b)-> a.index - b.index));
 
         if(indexObjMap.containsKey(index)){
             NumbIndex object = indexObjMap.get(index); // fetch old number object stored at current index
@@ -64,13 +61,8 @@ public class NumberContainers {
                 orderMap.remove(object.number);
         }
 
-        this.orderMap.putIfAbsent(number, new PriorityQueue<>(new Comparator<NumbIndex>(){
-                    @Override
-                    public int compare(NumbIndex n1, NumbIndex n2){
-                        return n1.index - n2.index;
-                    }
-                })
-        );
+        // intialise order map priority queue if new number is not in map
+        this.orderMap.putIfAbsent(number, new PriorityQueue<>(new PriorityQueue<>((a,b)-> a.index - b.index)));
 
         // index into new number priority queue
         NumbIndex numbObj = new NumbIndex(number, index);
