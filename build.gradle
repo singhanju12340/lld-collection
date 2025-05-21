@@ -17,6 +17,8 @@ plugins {
     id 'org.springframework.boot' version '2.6.4'
     id "maven"
     id "maven-publish"
+    id 'com.google.protobuf' version '0.9.4' // Use the latest version
+
 }
 
 group 'com.tekion'
@@ -36,6 +38,38 @@ jar {
 
 
 ext {
+}
+
+
+// Protobuf configuration
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:1.54.0" // Protobuf compiler
+    }
+    plugins {
+        create("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.58.0" // gRPC plugin
+        }
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.plugins {
+                create("grpc") // Generate gRPC stubs
+            }
+        }
+    }
+}
+
+// Ensure generated files are included in the source sets
+sourceSets {
+    main {
+        java {
+            srcDirs(
+                    "build/generated/source/proto/main/grpc",
+                    "build/generated/source/proto/main/java"
+            )
+        }
+    }
 }
 
 
@@ -66,6 +100,8 @@ dependencies {
 //    implementation 'com.graphql-java-kickstart:graphql-java-tools:11.1.0'
 
     implementation 'io.grpc:grpc-netty:1.54.0'
+    implementation "com.google.protobuf:protobuf-java:3.25.3" // Use the same version as protoc
+
     implementation 'io.grpc:grpc-protobuf:1.54.0'
     implementation 'io.grpc:grpc-stub:1.54.0'
     implementation 'net.devh:grpc-spring-boot-starter:2.14.0.RELEASE'
