@@ -8,7 +8,7 @@ public class Create5Thread {
 
 
     // newVirtualThreadPerTaskExecutor create light weight threads that are managed by the JVM, allowing for a large number of concurrent tasks without the overhead of traditional threads.
-
+// and others executors are added in obs
     public static void main(String[] args) {
         for(int i=0;i<5;i++){
             executorService.execute(new Runnable() {
